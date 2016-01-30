@@ -3,12 +3,19 @@
  */
 
 var server = require('./server/server');
+var database = require('./server/database');
 
 // initialization file
 
 function init(){
 
-    server.start();
+    database.connect(function(){
+
+        server.start();
+
+        require('./server/models/project');
+
+    });
 
 }
 

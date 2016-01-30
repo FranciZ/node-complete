@@ -1,9 +1,24 @@
-angular.module('cms', ['ui.bootstrap','ui.utils','ui.router','ngAnimate']);
+angular.module('cms', [
+    'ui.bootstrap',
+    'ui.utils',
+    'ui.router',
+    'ngAnimate',
+    'ngFileUpload'
+]);
 
 angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
 
+    $stateProvider.state('projects', {
+        url: '/projects',
+        templateUrl: 'partial/projects/projects.html'
+    });
+
+    $stateProvider.state('project', {
+        url: '/project',
+        templateUrl: 'partial/project/project.html'
+    });
     /* Add New States Above */
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/projects');
 
 });
 
