@@ -1,0 +1,18 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "run.js",
+  "engines":{
+      "node":"4.1.1",
+      "npm":"2.1.x"
+  },
+  "scripts": {
+      "start":"node run"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
