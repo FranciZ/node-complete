@@ -3,16 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "run.js",
-  "engines":{
-      "node":"4.1.1",
-      "npm":"2.1.x"
+  "engines": {
+    "node": "4.1.1",
+    "npm": "2.1.x"
   },
   "scripts": {
-      "start":"node run"
+    "start": "node run"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "serve-index": "^1.7.3",
+    "serve-static": "^1.10.2"
   }
 }
