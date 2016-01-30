@@ -1,4 +1,4 @@
-angular.module('cms').controller('ProjectCtrl',function($scope, Upload){
+angular.module('cms').controller('ProjectCtrl',function($scope, $http, projectService, Upload){
 
     $scope.upload = function(file){
 
@@ -13,6 +13,12 @@ angular.module('cms').controller('ProjectCtrl',function($scope, Upload){
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
+
+    };
+
+    $scope.save = function(){
+
+        projectService.create($scope.model);
 
     };
 

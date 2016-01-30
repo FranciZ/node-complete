@@ -3,7 +3,8 @@ angular.module('cms', [
     'ui.utils',
     'ui.router',
     'ngAnimate',
-    'ngFileUpload'
+    'ngFileUpload',
+    'ui.tinymce'
 ]);
 
 angular.module('cms').config(function($stateProvider, $urlRouterProvider) {

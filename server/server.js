@@ -5,6 +5,8 @@
 var express = require('express');
 var app     = express(); // returns the instance of express app/server
 
+var bodyParser = require('body-parser');
+
 var serveIndex = require('serve-index');
 // does the same thing as express.static() but is compatible with serveIndex
 var serveStatic = require('serve-static');
@@ -14,6 +16,9 @@ var router = require('./router');
 var PORT = process.env.PORT || 3000;
 
 exports.start = function(){
+
+    app.use(bodyParser.urlencoded());
+    app.use(bodyParser.json());
 
     app.set('view engine', 'ejs');
 
