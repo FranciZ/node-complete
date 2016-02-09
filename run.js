@@ -13,7 +13,7 @@ function init(){
 
         server.start();
 
-        require('./server/models/project');
+        require('./server/models');
 
     });
 

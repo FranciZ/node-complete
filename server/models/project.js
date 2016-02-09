@@ -7,7 +7,8 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema({
 
     title           : String,
-    description     : String
+    description     : String,
+    date            : { type:Date, default:Date.now }
 
 });
 

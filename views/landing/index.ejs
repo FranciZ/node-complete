@@ -1,3 +1,31 @@
-<h1>Test title</h1>
+<!DOCTYPE html>
+<html>
+<head>
 
-<img src="assets/images/y1IUoMQ6fYlpJa7-SyTuGhbN.jpg">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome to my page</h1>
+
+        <% if(user){ %>
+        <div>Logged in as: <%- user.email %></div>
+        <% }else{ %>
+        <div>Logged out</div>
+        <% } %>
+
+    </div>
+
+
+
+    <% include ../include/email-form.ejs %>
+
+</body>
+<script src="/assets/js/main.js"></script>
+</html>
+
+
