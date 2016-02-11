@@ -40,7 +40,10 @@ module.exports = function(app){
                 if (!err) console.log(' hooray! ');
             });
 
-        res.sendStatus(200);
+        res.send({
+            path    : path,
+            fileName: uniqueFilename
+        });
 
     });
 
@@ -54,6 +57,8 @@ module.exports = function(app){
         });
 
     });
+
+    // PROJECTS
 
     app.post('/api/project', function(req, res){
 
@@ -69,6 +74,56 @@ module.exports = function(app){
 
     });
 
+    app.get('/api/projects', function(req, res){
+
+        if(req.session.user) {
+
+            var Project = mongoose.model('Project');
+
+            Project.find(function (err, docs) {
+
+                if (!err) {
+                    res.send(docs);
+                } else {
+                    console.log(err);
+                }
+
+            });
+
+        }else{
+
+            res.sendStatus(401);
+
+        }
+
+    });
+
+    app.delete('/api/project/:id', function(req, res){
+
+        if(req.session.user) {
+
+            var id = req.params.id;
+            var Project = mongoose.model('Project');
+
+            Project.findByIdAndRemove(id, function (err, doc) {
+
+                if (!err) {
+                    res.sendStatus(200);
+                } else {
+                    res.sendStatus(400);
+                }
+
+            });
+
+        }else{
+
+            res.sendStatus(401);
+
+        }
+
+    });
+
+    // CHECK LOGIN STATUS
     app.get('/api/login-status', function(req, res){
 
         if(req.session.user){
@@ -100,18 +155,20 @@ module.exports = function(app){
         var password = data.password;
 
         var User = mongoose.model('User');
-        User.findOne({ email:email }, function(err, doc){
-
-            bcrypt.compare(password, doc.password, function(err, match) {
+        User.findOne({ email:email }, function(err, userDoc){
+            // compare the plain text password sent from the browser
+            // with the hashed password stored in the database
+            // belonging to this user (email)
+            bcrypt.compare(password, userDoc.password, function(err, match) {
 
                 if(match === true){
 
                     var hour = 3600000;
                     req.session.cookie.expires = new Date(Date.now() + hour);
                     req.session.cookie.maxAge = hour;
-                    doc.password = null;
-                    req.session.user = doc;
-                    res.send(doc);
+                    userDoc.password = null;
+                    req.session.user = userDoc;
+                    res.send(userDoc);
 
                 }else{
                     res.sendStatus(401);
@@ -150,34 +207,12 @@ module.exports = function(app){
                 });
 
             });
+
         });
 
-
     });
 
-    app.get('/api/projects', function(req, res){
 
-        if(req.session.user) {
-
-            var Project = mongoose.model('Project');
-
-            Project.find(function (err, docs) {
-
-                if (!err) {
-                    res.send(docs);
-                } else {
-                    console.log(err);
-                }
-
-            });
-
-        }else{
-
-            res.sendStatus(401);
-
-        }
-
-    });
 
 
 };

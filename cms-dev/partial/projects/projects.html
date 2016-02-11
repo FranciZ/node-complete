@@ -10,12 +10,14 @@
             <tr>
                 <th>Name</th>
                 <th ng-click="toggleDateOrder()">Date</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="project in list | orderBy:options.orderFilter">
                 <td>{{project.title}}</td>
                 <td>{{project.date | date:'dd/MM/yy hh:mm:ss'}}</td>
+                <td><div class="btn btn-xs btn-danger" ng-click="deleteProject(project._id)">Delete</div></td>
             </tr>
         </tbody>
     </table>

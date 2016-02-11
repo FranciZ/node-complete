@@ -1,4 +1,4 @@
-angular.module('cms').controller('ProjectsCtrl',function($scope, $state, projectService){
+angular.module('cms').controller('ProjectsCtrl',function($scope, $state, authService, projectService){
 
     $scope.list = [];
 
@@ -10,9 +10,25 @@ angular.module('cms').controller('ProjectsCtrl',function($scope, $state, project
 
     });
 
+    $scope.deleteProject = function(id){
+
+        projectService.remove(id, function(){
+
+            angular.forEach($scope.list, function(project, index){
+
+                if(project._id === id){
+                    $scope.list.splice(index,1);
+                }
+
+            });
+
+        });
+
+    };
+
     $scope.logOut = function(){
 
-        projectService.logOut(function(){
+        authService.logOut(function(){
 
             $state.go('login');
 

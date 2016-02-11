@@ -1,11 +1,14 @@
-angular.module('cms').controller('LoginCtrl',function($scope, $http){
+angular.module('cms').controller('LoginCtrl',function($scope, $state, authService){
+
+    $scope.loginUser = {};
 
     $scope.login = function(){
 
-        $http.post('/api/login', $scope.loginUser)
-            .then(function(res){
-                console.log(res.data);
-            });
+        authService.loginUser($scope.loginUser, function(res){
+
+            $state.go('projects');
+
+        });
 
     };
 

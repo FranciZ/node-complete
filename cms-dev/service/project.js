@@ -16,18 +16,6 @@ angular.module('cms').factory('projectService',function($http) {
                 });
 
         },
-        logOut:function(cb){
-
-            $http.post('/api/logout', {})
-                .then(function(res){
-
-                    if(cb){
-                        cb();
-                    }
-
-                });
-
-        },
         getList:function(cb){
 
             $http.get('/api/projects')
@@ -35,12 +23,25 @@ angular.module('cms').factory('projectService',function($http) {
 
                     var list = res.data;
                     project.model.list = list;
+                    console.log(list);
 
                     if(cb) {
                         cb(list);
                     }
 
                 });
+
+        },
+        remove:function(id, cb){
+
+            $http.delete('/api/project/'+id)
+                .then(function(res){
+
+                if(cb) {
+                    cb(res);
+                }
+
+            });
 
         }
     };

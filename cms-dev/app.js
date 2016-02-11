@@ -12,10 +12,8 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('projects', {
         url: '/projects',
         resolve:{
-            loginStatus:function($http){
-
-                return $http.get('/api/login-status');
-
+            loginStatus:function($http, authService){
+                return authService.loginStatus();
             }
         },
         templateUrl: 'partial/projects/projects.html'
@@ -23,6 +21,11 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state('project', {
         url: '/project',
+        resolve:{
+            loginStatus:function($http, authService){
+                return authService.loginStatus();
+            }
+        },
         templateUrl: 'partial/project/project.html'
     });
     $stateProvider.state('login', {

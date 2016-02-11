@@ -1,6 +1,21 @@
 angular.module('cms').controller('ProjectCtrl',function($scope, $http, projectService, Upload){
 
+    $scope.sections = [
+        {
+            title:''
+        }
+    ];
+
     $scope.options = {};
+    $scope.model = {
+        images : []
+    };
+
+    $scope.addUploadButton = function(){
+
+        $scope.sections.push({ title:'' });
+
+    };
 
     $scope.selectFile = function(file){
 
@@ -8,24 +23,49 @@ angular.module('cms').controller('ProjectCtrl',function($scope, $http, projectSe
 
     };
 
-    $scope.upload = function(file){
+    $scope.uploadImage = function(file, section){
 
-        console.log(file);
+
+
+
+            Upload.upload({
+                url: '/api/upload',
+                data: {file: file }
+            }).then(function(resp){
+
+                section.coverImage = resp.data;
+
+                console.log(resp.data);
+
+            }, function(){
+
+            }, function(){
+
+            });
+
+
+
+    };
+
+    $scope.upload = function(file){
 
         $scope.options.fileName = file.name;
 
         Upload.upload({
             url: '/api/upload',
             data: {file: file }
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-            $scope.options.fileUploaded = file;
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        }).then(function (res) {
 
+            // on upload complete
+            console.log(res);
+            $scope.options.fileUploaded = file;
+            $scope.model.coverImage = res.data;
+
+        }, function (resp) {
+
+        }, function (evt) {
+
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             $scope.options.progressPercentage = progressPercentage;
 
         });
@@ -34,6 +74,7 @@ angular.module('cms').controller('ProjectCtrl',function($scope, $http, projectSe
 
     $scope.save = function(){
 
+        $scope.model.sections = $scope.sections;
         projectService.create($scope.model);
 
     };

@@ -1,11 +1,13 @@
 <div class="col-md-12" ng-controller="RegisterCtrl">
 
-    <label>Email</label>
-    <input class="form-control" type="text" ng-model="user.email">
-    <label>Password</label>
-    <input class="form-control" type="password" ng-model="user.password">
-    <div class="btn btn-success" ng-click="register()">Register</div>
-
-    <br/><br/>
+    <div class="register-panel">
+        <h3>Register</h3>
+        <label>Email</label>
+        <input class="form-control" type="email" ng-model="user.email">
+        <label>Password</label>
+        <input class="form-control" type="password" ng-model="user.password">
+        <br/>
+        <div class="btn btn-success" ng-click="register()">Register</div>
+    </div>
 
 </div>

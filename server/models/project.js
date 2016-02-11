@@ -8,7 +8,15 @@ var schema = mongoose.Schema({
 
     title           : String,
     description     : String,
-    date            : { type:Date, default:Date.now }
+    date            : { type:Date, default:Date.now },
+    images          : [ { fileName:String, path:String } ],
+    coverImage      : { fileName:String, path:String },
+    sections         : [
+        {
+            title:String,
+            coverImage:{ path:String, fileName:String
+            }
+        } ]
 
 });
 

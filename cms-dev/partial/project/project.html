@@ -6,10 +6,12 @@
     <label for="description">Description</label>
     <textarea id="description" ui-tinymce ng-model="model.description" class="form-control"></textarea>
     <br/>
+
     <label>Upload cover</label><br/>
     <div class="btn btn-primary" ngf-select="selectFile($file)">Select cover</div>
     <div class="btn btn-success" ng-click="upload(options.selectedFile)" ng-if="options.selectedFile">Upload cover</div>
     <br/>
+
     <p>{{options.selectedFile.name}}</p>
     <br/>
     <img ngf-thumbnail="options.selectedFile || '/thumb.jpg'" ngf-size="{width: 200, height: 100, quality: 0.9}">
@@ -20,8 +22,12 @@
     </div>
     <hr/>
     <label>Upload images</label><br/>
-    <div class="btn btn-primary" ngf-select="upload($file)">Upload images</div>
-
+    <div ng-repeat="section in sections">
+        <input type="text" class="form-control" ng-model="section.title">
+        <div class="btn btn-primary" ngf-select="uploadImage($file, section)" >Upload image</div><br/><br/>
+    </div>
+    <br/>
+    <div class="btn btn-success" ng-click="addUploadButton()">+</div>
     <br/><br/>
     <div class="btn btn-lg btn-block btn-success" ng-click="save()">Save</div>
 
