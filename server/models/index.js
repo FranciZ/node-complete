@@ -6,6 +6,7 @@
 module.exports = {
 
     project : require('./project'),
-    user : require('./user')
+    user    : require('./user'),
+    image   : require('./image')
 
 };

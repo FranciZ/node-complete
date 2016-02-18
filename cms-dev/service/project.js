@@ -6,19 +6,32 @@ angular.module('cms').factory('projectService',function($http) {
             list:[],
             item:null
         },
-        create:function(data){
+        create:function(data, cb){
 
             $http.post('/api/project', data)
                 .then(function(res){
 
-                    console.log(res);
+                    if(cb){
+                        cb(res.data);
+                    }
+
+                });
+
+        },
+        getOne:function(id){
+
+            return $http.get('/api/project/'+id)
+                .then(function(res){
+
+                    var item = res.data;
+                    project.model.item = item;
 
                 });
 
         },
         getList:function(cb){
 
-            $http.get('/api/projects')
+            return $http.get('/api/projects')
                 .then(function(res){
 
                     var list = res.data;
@@ -43,8 +56,30 @@ angular.module('cms').factory('projectService',function($http) {
 
             });
 
+        },
+        /**
+         *
+         * @param {String} id
+         * @param {Object} data
+         * @param {Function} cb
+         * @returns {*}
+         */
+        update:function(id, data, cb){
+
+            return $http.put('/api/project/'+id,data)
+                .then(function(res){
+
+                    project.model.item = res.data;
+
+                    if(cb){
+                        cb(res.data);
+                    }
+
+                });
+
         }
     };
 
 	return project;
 });
+

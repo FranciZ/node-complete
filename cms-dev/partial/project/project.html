@@ -1,20 +1,33 @@
-<div class="col-md-12" ng-controller="ProjectCtrl">
 
-    <h1>Create new project</h1>
+<section class="content-header">
+
+    <div class="btn btn-md pull-right btn-success" ng-click="save()" ng-if="!isEdit">Create</div>
+    <div class="btn btn-md pull-right btn-success" ng-click="save()" ng-if="isEdit">Save</div>
+    <div class="btn btn-md pull-right btn-danger" ng-click="save()">Delete</div>
+
+    <h1 ng-if="!isEdit">Create new project</h1>
+    <h1 ng-if="isEdit">Edit project</h1>
+</section>
+<section class="content">
+
+
     <label for="title">Title</label>
     <input type="text" id="title" class="form-control" ng-model="model.title"/><br/>
+    <p class="text-danger" ng-if="errors.title">You need to enter a title</p>
     <label for="description">Description</label>
     <textarea id="description" ui-tinymce ng-model="model.description" class="form-control"></textarea>
+    <p class="text-danger" ng-if="errors.description">You need to enter a description</p>
     <br/>
 
     <label>Upload cover</label><br/>
     <div class="btn btn-primary" ngf-select="selectFile($file)">Select cover</div>
     <div class="btn btn-success" ng-click="upload(options.selectedFile)" ng-if="options.selectedFile">Upload cover</div>
+    <p class="text-danger" ng-if="errors.coverImage">You need to upload a cover image</p>
     <br/>
 
     <p>{{options.selectedFile.name}}</p>
     <br/>
-    <img ngf-thumbnail="options.selectedFile || '/thumb.jpg'" ngf-size="{width: 200, height: 100, quality: 0.9}">
+
     <div class="progress">
         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{options.progressPercentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{options.progressPercentage}}%">
            {{options.progressPercentage}}% Complete (success)
@@ -22,13 +35,13 @@
     </div>
     <hr/>
     <label>Upload images</label><br/>
-    <div ng-repeat="section in sections">
-        <input type="text" class="form-control" ng-model="section.title">
-        <div class="btn btn-primary" ngf-select="uploadImage($file, section)" >Upload image</div><br/><br/>
+    <div>
+        <div class="btn btn-primary" ngf-select="uploadImage($files)" ngf-multiple="true">Upload image</div><br/><br/>
+        <img ng-repeat="image in model.images" ng-src="{{image.thumbPath}}">
     </div>
-    <br/>
-    <div class="btn btn-success" ng-click="addUploadButton()">+</div>
-    <br/><br/>
-    <div class="btn btn-lg btn-block btn-success" ng-click="save()">Save</div>
+    <p class="text-danger" ng-if="errors.images">You need to upload some images</p>
+
 
 </div>
+
+</section>

@@ -6,7 +6,7 @@ angular.module('cms').controller('LoginCtrl',function($scope, $state, authServic
 
         authService.loginUser($scope.loginUser, function(res){
 
-            $state.go('projects');
+            $state.go('app.projects');
 
         });
 

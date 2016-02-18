@@ -1,3 +1,5 @@
+/* globals alert */
+
 angular.module('cms').controller('RegisterCtrl',function(
     $scope,
     $state,

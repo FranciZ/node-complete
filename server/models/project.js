@@ -9,14 +9,8 @@ var schema = mongoose.Schema({
     title           : String,
     description     : String,
     date            : { type:Date, default:Date.now },
-    images          : [ { fileName:String, path:String } ],
-    coverImage      : { fileName:String, path:String },
-    sections         : [
-        {
-            title:String,
-            coverImage:{ path:String, fileName:String
-            }
-        } ]
+    images          : [ { fileName:String, path:String, thumbPath:String, ext:String } ],
+    coverImage      : { fileName:String, path:String, thumbPath:String, ext:String }
 
 });
 

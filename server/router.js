@@ -33,17 +33,34 @@ module.exports = function(app){
 
         var thumbPath = './assets/thumbs/'+uniqueFilename;
 
+        var extParts = path.split('.');
+        var ext = extParts[extParts.length-1];
+
+        var Image = mongoose.model('Image');
+        var image = new Image({
+            fileName    : uniqueFilename,
+            path        : '/assets/images/'+uniqueFilename,
+            thumbPath   : '/assets/thumbs/'+uniqueFilename,
+            ext         : ext
+        });
+
         gm(path)
             .resize(353, 257)
             .autoOrient()
             .write(thumbPath, function (err) {
-                if (!err) console.log(' hooray! ');
-            });
+                if (!err) {
+                    console.log(' hooray! ');
+                    image.save(function (err) {
 
-        res.send({
-            path    : path,
-            fileName: uniqueFilename
-        });
+                        if (err) {
+                            res.sendStatus(400);
+                        } else {
+                            res.send(image);
+                        }
+
+                    });
+                }
+            });
 
     });
 
@@ -76,7 +93,7 @@ module.exports = function(app){
 
     app.get('/api/projects', function(req, res){
 
-        if(req.session.user) {
+        //if(req.session.user) {
 
             var Project = mongoose.model('Project');
 
@@ -90,11 +107,11 @@ module.exports = function(app){
 
             });
 
-        }else{
+        //}else{
 
-            res.sendStatus(401);
+            //res.sendStatus(401);
 
-        }
+        //}
 
     });
 
@@ -123,11 +140,48 @@ module.exports = function(app){
 
     });
 
+    app.get('/api/project/:id', function(req, res){
+
+        var Project = mongoose.model('Project');
+
+        Project.findById(req.params.id, function(err, doc){
+
+            if(doc) {
+                res.send(doc);
+            }else{
+                res.sendStatus(404);
+            }
+
+        });
+
+    });
+
+    app.put('/api/project/:id', function(req, res){
+
+        var projectData = req.body;
+        var projectId   = req.params.id;
+
+        var Project = mongoose.model('Project');
+
+        Project.findByIdAndUpdate(projectId, projectData,  { 'new': true }, function(err, doc){
+
+            if(!err) {
+                res.send(doc);
+            }else{
+                res.sendStatus(400);
+            }
+
+        });
+
+
+    });
+
     // CHECK LOGIN STATUS
     app.get('/api/login-status', function(req, res){
 
         if(req.session.user){
-            res.sendStatus(200);
+            //res.sendStatus(200);
+            res.send(req.session.user);
         }else{
             res.sendStatus(401);
         }
@@ -155,7 +209,7 @@ module.exports = function(app){
         var password = data.password;
 
         var User = mongoose.model('User');
-        User.findOne({ email:email }, function(err, userDoc){
+        User.findOne({ email : email }, function(err, userDoc){
             // compare the plain text password sent from the browser
             // with the hashed password stored in the database
             // belonging to this user (email)
@@ -184,17 +238,18 @@ module.exports = function(app){
 
         var data = req.body;
 
-        var email = data.email;
         var password = data.password;
 
         bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(password, salt, function(err, hash) {
 
-                myHash = hash;
-                data.password = hash;
+                var userDoc = {
+                    email       : data.email,
+                    password    : hash
+                };
 
                 var User = mongoose.model('User');
-                var user = new User(data);
+                var user = new User(userDoc);
                 user.save(function(err){
 
                     if(!err) {
@@ -211,8 +266,6 @@ module.exports = function(app){
         });
 
     });
-
-
 
 
 };

@@ -2,6 +2,9 @@ angular.module('cms').factory('authService',function($http) {
 
 	var service = {
 
+        model:{
+            user:null
+        },
         registerUser:function(user, cb){
 
             $http.post('/api/register', user)
@@ -29,7 +32,15 @@ angular.module('cms').factory('authService',function($http) {
         },
         loginStatus:function(){
 
-            return $http.get('/api/login-status');
+            var promise = $http.get('/api/login-status');
+
+            promise.then(function(res){
+
+                service.model.user = res.data;
+
+            });
+
+            return promise;
 
         },
         logOut:function(cb){

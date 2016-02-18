@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
   <link href="app.less" type="text/css" rel="stylesheet/less">
+    <link href="bower_components/AdminLTE/dist/css/AdminLTE.min.css" rel="stylesheet">
+    <link href="bower_components/AdminLTE/dist/css/skins/skin-blue.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="skin-blue fixed">
 
   <!-- Livereload script for development only (stripped during dist build) -->
   <script src="http://localhost:35729/livereload.js" data-concat="false"></script>
@@ -38,15 +40,19 @@
   <script src="partial/login/login.js"></script>
   <script src="partial/register/register.js"></script>
   <script src="service/auth.js"></script>
+  <script src="partial/sidebar/sidebar.js"></script>
+  <script src="partial/header/header.js"></script>
   <!-- Add New Component JS Above -->
 
-  <div>
-    <div id="content" class="container">
-      <div class="row">
-        <div ui-view>
-        </div>
-      </div>
-    </div>
+  <div class="wrapper">
+
+      <header class="main-header" ui-view="main-header" ng-if="!isViewLogin"></header>
+      <aside class="sidebar-wrapper" ui-view="sidebar" ng-if="!isViewLogin">
+
+      </aside>
+
+      <div class="content-wrapper" ng-class="{'wrapper-no-margin':isViewLogin}" ui-view="main"></div>
+
   </div>
 
 </body>

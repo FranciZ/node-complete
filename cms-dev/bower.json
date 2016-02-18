@@ -23,6 +23,7 @@
     "less.js": "~1.6",
     "font-awesome": "~4.0",
     "ng-file-upload-shim": "^11.2.3",
-    "angular-ui-tinymce": "^0.0.12"
+    "angular-ui-tinymce": "^0.0.12",
+    "AdminLTE": "admin-lte#^2.3.2"
   }
 }

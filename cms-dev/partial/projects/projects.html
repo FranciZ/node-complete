@@ -1,8 +1,9 @@
-<div class="col-md-12 projects-list" ng-controller="ProjectsCtrl">
 
-    <div class="btn btn-danger" ng-click="logOut()">Log Out</div>
+<section class="content-header">
+    <h1>Projects</h1>
+</section>
+<section class="content">
 
-    <h1>Projects List One</h1>
     <div class="btn btn-primary" ng-click="createProject()">Create new</div>
 
     <table class="table table-striped">
@@ -17,10 +18,12 @@
             <tr ng-repeat="project in list | orderBy:options.orderFilter">
                 <td>{{project.title}}</td>
                 <td>{{project.date | date:'dd/MM/yy hh:mm:ss'}}</td>
-                <td><div class="btn btn-xs btn-danger" ng-click="deleteProject(project._id)">Delete</div></td>
+                <td>
+                    <div class="btn btn-xs btn-danger" ng-click="deleteProject(project._id)">Delete</div>
+                    <div class="btn btn-xs btn-primary" ui-sref="app.project({id:project._id})">Edit</div>
+                </td>
             </tr>
         </tbody>
     </table>
 
-
-</div>
+</section>
