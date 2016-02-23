@@ -1,0 +1,20 @@
+<section class="content-header">
+    <h1>New article</h1>
+</section>
+
+<section class="content">
+
+    <label>Title</label>
+    <input type="text" class="form-control" ng-model="article.title">
+    <br/>
+    <label>Excerpt</label>
+    <input type="text" class="form-control" ng-model="article.excerpt">
+    <br/>
+    <label>Content</label>
+    <textarea id="description" ui-tinymce ng-model="article.content" class="form-control"></textarea>
+    <br/>
+    <label>Select project</label>
+    <select ng-model="article.project" class="form-control" ng-options="project.title for project in projects"></select>
+
+</section>
+

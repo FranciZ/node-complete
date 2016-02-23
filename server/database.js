@@ -5,8 +5,8 @@
 var mongoose = require('mongoose');
 
 exports.connect = function(success){
-
-    mongoose.connect('mongodb://admin:mypassword@ds047945.mongolab.com:47945/heroku_72h76cfr');
+    // /admin:mypassword@ds047945.mongolab.com:47945/heroku_72h76cfr
+    mongoose.connect('mongodb://localhost/cms-db-15');
 
     mongoose.connection.on('error', function(err){
 

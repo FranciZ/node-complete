@@ -2,20 +2,17 @@
  * Created by francizidar on 30/01/16.
  */
 
-var express = require('express');
-var app     = express(); // returns the instance of express app/server
-
-var bodyParser = require('body-parser');
-
-var serveIndex = require('serve-index');
+var express     = require('express');
+var app         = express(); // returns the instance of express app/server
+var bodyParser  = require('body-parser');
+var serveIndex  = require('serve-index');
 // does the same thing as express.static() but is compatible with serveIndex
 var serveStatic = require('serve-static');
+var session     = require('express-session');
 
-var session = require('express-session');
+var router      = require('./router');
 
-var router = require('./router');
-
-var PORT = process.env.PORT || 3000;
+var PORT        = process.env.PORT || 3000;
 
 exports.start = function(){
 
@@ -42,12 +39,6 @@ exports.start = function(){
         router(app);
 
     });
-
-};
-
-exports.stop = function(){
-
-
 
 };
 

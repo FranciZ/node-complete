@@ -24,6 +24,10 @@
     <div class="btn btn-success" ng-click="upload(options.selectedFile)" ng-if="options.selectedFile">Upload cover</div>
     <p class="text-danger" ng-if="errors.coverImage">You need to upload a cover image</p>
     <br/>
+    <br/>
+    <div class="image-thumb" style="background-image: url({{model.coverImage.thumbPath}})">
+
+    </div>
 
     <p>{{options.selectedFile.name}}</p>
     <br/>
@@ -36,8 +40,11 @@
     <hr/>
     <label>Upload images</label><br/>
     <div>
-        <div class="btn btn-primary" ngf-select="uploadImage($files)" ngf-multiple="true">Upload image</div><br/><br/>
+        <div class="btn btn-primary" ngf-select="uploadImages($files)" ngf-multiple="true">Upload image</div><br/><br/>
         <img ng-repeat="image in model.images" ng-src="{{image.thumbPath}}">
+    </div>
+    <div class="image-thumb" ng-repeat="myImage in model.images">
+        Thumb
     </div>
     <p class="text-danger" ng-if="errors.images">You need to upload some images</p>
 

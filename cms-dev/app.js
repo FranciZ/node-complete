@@ -60,7 +60,6 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
                     project:function($stateParams,$location, projectService){
 
                         var id = $stateParams.id;
-                        console.log($location.search());
 
                         if(id.length > 0) {
                             return projectService.getOne(id);
@@ -76,6 +75,7 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
         }
 
     });
+
     $stateProvider.state('login', {
         url: '/login',
         views:{
@@ -96,6 +96,40 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
         }
 
     });
+    $stateProvider.state('app.articles', {
+        url: 'articles',
+        views:{
+            'main@':{
+                templateUrl: 'partial/articles/articles.html',
+                controller:'ArticlesCtrl'
+            }
+        }
+
+    });
+    $stateProvider.state('app.edit-article', {
+        url: 'edit-article/:id',
+        views:{
+            'main@':{
+                templateUrl: 'partial/edit-article/edit-article.html',
+                controller:'EditArticleCtrl'
+            }
+        }
+    });
+    $stateProvider.state('app.new-article', {
+        url: 'new-article',
+        views:{
+            'main@':{
+                templateUrl: 'partial/new-article/new-article.html',
+                controller:'NewArticleCtrl'
+            }
+        },
+        resolve:{
+            projects:function(projectService){
+                return projectService.getList();
+            }
+        }
+    });
+
     /* Add New States Above */
     $urlRouterProvider.otherwise('/login');
 

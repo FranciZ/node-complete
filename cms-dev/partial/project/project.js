@@ -16,6 +16,8 @@ angular.module('cms').controller('ProjectCtrl',function(
         images : []
     };
 
+
+
     $scope.isEdit = false;
 
     var id = $stateParams.id;
@@ -23,10 +25,11 @@ angular.module('cms').controller('ProjectCtrl',function(
     if(id.length > 0){
 
         $scope.model = projectService.model.item;
-
         $scope.isEdit = true;
 
     }
+
+    console.log($scope.model);
 
     $scope.addUploadButton = function(){
 
@@ -40,7 +43,7 @@ angular.module('cms').controller('ProjectCtrl',function(
 
     };
 
-    $scope.uploadImage = function(files){
+    $scope.uploadImages = function(files){
 
         angular.forEach(files, function(file, index){
 
@@ -49,7 +52,7 @@ angular.module('cms').controller('ProjectCtrl',function(
                 data: {file: file }
             }).then(function(res){
 
-                $scope.model.images.push(res.data);
+                $scope.model.images.push(res.data._id);
 
             }, function(){
 
@@ -58,8 +61,6 @@ angular.module('cms').controller('ProjectCtrl',function(
             });
 
         });
-
-
 
     };
 

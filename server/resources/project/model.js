@@ -3,13 +3,14 @@
  */
 
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var schema = mongoose.Schema({
+var schema = Schema({
 
     title           : String,
     description     : String,
     date            : { type:Date, default:Date.now },
-    images          : [ { fileName:String, path:String, thumbPath:String, ext:String } ],
+    images          : [ { type:Schema.Types.ObjectId, ref:'Image' } ],
     coverImage      : { fileName:String, path:String, thumbPath:String, ext:String }
 
 });
