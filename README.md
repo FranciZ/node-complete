@@ -1,5 +1,21 @@
 # AngularJS & NodeJS
 
+## Prerequisites
+
+* installed NodeJS (nodejs.org)
+* installed MongoDB (mongodb.org)
+* running *mongod* in the background
+* bower, grunt and yo installed
+
+```javascript
+npm install -g grunt-cli yo bower
+```
+```javascript
+npm install -g generator-cg-angular
+```
+
+## 
+
 #### API component overview:
 
 * MongoDB / mongoose
