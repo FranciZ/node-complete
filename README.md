@@ -14,6 +14,35 @@ npm install -g grunt-cli yo bower
 npm install -g generator-cg-angular
 ```
 
+## Installation
+
+```
+$ npm install
+```
+```
+$ bower install
+```
+
+## Running
+
+### CMS
+go to *cms-dist* folder
+
+#### Build
+
+```
+$ grunt build
+```
+
+### API
+
+#### Running
+
+```
+$ node run
+```
+
+
 ## 
 
 #### API component overview:
