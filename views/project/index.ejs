@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="jumbotron" style="background-size:cover;background-position:center;background-image:url(<%= project.coverImage.path%>)">
+            <h1 style="color:#fff;"><%= project.title %></h1>
+            <p><%- project.description %></p>
+        </div>
+
+        <% for(var i=0;i<project.images.length; i++){%>
+        <div class="col-sm-4 col-md-4">
+            <div class="thumbnail">
+                <a href="<%=project.images[i].path%>">
+                    <img src="<%= project.images[i].thumbPath %>" alt="...">
+                </a>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+
+
+
+</body>
+</html>

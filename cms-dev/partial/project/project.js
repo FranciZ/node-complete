@@ -52,7 +52,7 @@ angular.module('cms').controller('ProjectCtrl',function(
                 data: {file: file }
             }).then(function(res){
 
-                $scope.model.images.push(res.data._id);
+                $scope.model.images.push(res.data);
 
             }, function(){
 

@@ -10,7 +10,8 @@ var schema = Schema({
     title           : String,
     description     : String,
     date            : { type:Date, default:Date.now },
-    images          : [ { type:Schema.Types.ObjectId, ref:'Image' } ],
+    images          : [ { type:String, ref:'Image' } ],
+    slug            : String,
     coverImage      : { fileName:String, path:String, thumbPath:String, ext:String }
 
 });

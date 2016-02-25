@@ -43,6 +43,7 @@ exports.init = function(app){
                         if (err) {
                             res.sendStatus(400);
                         } else {
+                            console.log('Send back image');
                             res.send(image);
                         }
 

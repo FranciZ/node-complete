@@ -10,19 +10,33 @@
 <body>
 
     <div class="container">
-        <h1>Welcome to my page</h1>
 
-        <% if(user){ %>
-        <div>Logged in as: <%- user.email %></div>
-        <% }else{ %>
-        <div>Logged out</div>
-        <% } %>
+        <div class="row">
+
+            <% for(var i=0;i<projects.length;i++){
+                var title = projects[i].title;
+
+                if(projects[i].title.length > 18){
+                    title = projects[i].title.slice(0, 18)+'...';
+                }
+
+            %>
+            <div class="col-sm-4 col-md-4">
+                <div class="thumbnail">
+                    <img src="<%= projects[i].coverImage.thumbPath %>" alt="...">
+                    <div class="caption">
+                        <h3><%= title %></h3>
+                        <p> <a href="/project/<%= projects[i]._id %>" class="btn btn-default" role="button">Read more</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <% } %>
+
+        </div>
 
     </div>
 
-
-
-    <% include ../include/email-form.ejs %>
 
 </body>
 <script src="/assets/js/main.js"></script>

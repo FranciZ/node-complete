@@ -43,9 +43,7 @@
         <div class="btn btn-primary" ngf-select="uploadImages($files)" ngf-multiple="true">Upload image</div><br/><br/>
         <img ng-repeat="image in model.images" ng-src="{{image.thumbPath}}">
     </div>
-    <div class="image-thumb" ng-repeat="myImage in model.images">
-        Thumb
-    </div>
+
     <p class="text-danger" ng-if="errors.images">You need to upload some images</p>
 
 

@@ -1,17 +1,11 @@
 
 var nodemailer = require('nodemailer');
 var resources = require('./resources');
+var siteRouter  = require('./site-router');
 
 module.exports = function(app){
 
-    // ejs template routes
-    app.get('/', function(req, res){
-
-        console.log(req.session.user);
-
-        res.render('landing/index', { title:'My Landing Page', user:req.session.user });
-
-    });
+    siteRouter(app);
 
     app.post('/api/email', function(req, res){
 

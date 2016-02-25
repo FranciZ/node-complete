@@ -1,5 +1,5 @@
 var mongoose    = require('mongoose');
-
+var slug = require('slug');
 /**
  * Initialize router
  * @param app
@@ -10,11 +10,22 @@ exports.init = function(app){
 
         var Project = mongoose.model('Project');
 
-        var project = new Project(req.body);
+        var data = req.body;
 
-        project.save(function(err){
+        var slug = slug(data.title);
+        data.slug = slug;
 
-            res.send(project);
+        var project = new Project(data);
+
+        project.findOne({slug:slug}, function(err, doc){
+
+            if(!doc){
+                project.save(function(err){
+
+                    res.send(project);
+
+                });
+            }
 
         });
 
@@ -71,7 +82,11 @@ exports.init = function(app){
 
         var Project = mongoose.model('Project');
 
-        Project.findById(req.params.id, function(err, doc){
+        var query = Project.findById(req.params.id);
+
+        query.populate('images');
+
+        query.exec(function(err, doc){
 
             if(doc) {
                 res.send(doc);
@@ -82,6 +97,7 @@ exports.init = function(app){
         });
 
     });
+
 
     app.put('/api/project/:id', function(req, res){
 
