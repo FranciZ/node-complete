@@ -15,11 +15,14 @@
 
         </thead>
         <tbody>
-            <tr ng-repeat="item in list">
-                <td>{{item.title}}</td>
-                <td>{{item.excerpt}}</td>
-                <td>{{item.dateTime | date:'dd/MM/yy hh:mm:ss'}}</td>
-                <td></td>
+            <tr ng-repeat="article in list">
+                <td>{{article.title}}</td>
+                <td>{{article.excerpt}}</td>
+                <td>{{article.dateTime | date:'dd/MM/yy hh:mm:ss'}}</td>
+                <td>
+                    <div class="btn btn-xs btn-primary" ng-click="edit()">Edit</div>
+                    <div class="btn btn-xs btn-danger" ng-click="delete(article._id)">Delete</div>
+                </td>
             </tr>
 
 

@@ -42,5 +42,22 @@ exports.init = function(app){
 
     });
 
+    app.delete('/api/article/:id', function(req, res){
+
+        var id = req.params.id;
+        var Article = mongoose.model('Article');
+
+        Article.findByIdAndRemove(id, function (err, doc) {
+
+            if (!err) {
+                res.sendStatus(200);
+            } else {
+                res.sendStatus(400);
+            }
+
+        });
+
+    });
+
 
 };

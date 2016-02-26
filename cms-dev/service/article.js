@@ -33,6 +33,16 @@ angular.module('cms').factory('articleService',function($http) {
 
                 });
 
+        },
+        remove:function(id, cb){
+            $http.delete('/api/article/'+id)
+                .then(function(res){
+
+                    if(cb) {
+                        cb(res);
+                    }
+
+                });
         }
     };
 
