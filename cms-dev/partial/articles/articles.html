@@ -7,15 +7,21 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Title</th>
+                <th>Excerpt</th>
                 <th>Date</th>
-                <th>Views</th>
-                <th>Published</th>
                 <th></th>
             </tr>
 
         </thead>
         <tbody>
+            <tr ng-repeat="item in list">
+                <td>{{item.title}}</td>
+                <td>{{item.excerpt}}</td>
+                <td>{{item.dateTime | date:'dd/MM/yy hh:mm:ss'}}</td>
+                <td></td>
+            </tr>
+
 
         </tbody>
     </table>

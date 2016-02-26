@@ -6,6 +6,41 @@ var mongoose    = require('mongoose');
  */
 exports.init = function(app){
 
+    app.post('/api/article', function(req, res){
+
+        var Article = mongoose.model('Article');
+
+        var article = new Article(req.body);
+
+        article.save(function(err){
+
+            res.send(article);
+
+        });
+
+    });
+
+    app.get('/api/articles', function(req, res){
+
+        //if(req.session.user) {
+
+        var Article = mongoose.model('Article');
+
+        var query = Article.find();
+
+        query.populate('projects');
+
+        query.exec(function (err, docs) {
+
+            if (!err) {
+                res.send(docs);
+            } else {
+                console.log(err);
+            }
+
+        });
+
+    });
 
 
 };

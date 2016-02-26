@@ -103,6 +103,11 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
                 templateUrl: 'partial/articles/articles.html',
                 controller:'ArticlesCtrl'
             }
+        },
+        resolve:{
+            projects:function(articleService){
+                return articleService.getList();
+            }
         }
 
     });
