@@ -59,5 +59,25 @@ exports.init = function(app){
 
     });
 
+    app.get('/api/article/:id', function(req, res){
+
+        var Article = mongoose.model('Article');
+
+        var query = Article.findById(req.params.id);
+
+        query.populate('projects');
+
+        query.exec(function(err, doc){
+
+            if(doc) {
+                res.send(doc);
+            }else{
+                res.sendStatus(404);
+            }
+
+        });
+
+    });
+
 
 };

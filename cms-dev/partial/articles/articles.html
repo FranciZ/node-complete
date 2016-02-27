@@ -20,7 +20,7 @@
                 <td>{{article.excerpt}}</td>
                 <td>{{article.dateTime | date:'dd/MM/yy hh:mm:ss'}}</td>
                 <td>
-                    <div class="btn btn-xs btn-primary" ng-click="edit()">Edit</div>
+                    <div class="btn btn-xs btn-primary" ui-sref="app.edit-article({id:article._id})">Edit</div>
                     <div class="btn btn-xs btn-danger" ng-click="delete(article._id)">Delete</div>
                 </td>
             </tr>

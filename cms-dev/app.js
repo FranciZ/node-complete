@@ -115,9 +115,18 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
         url: 'edit-article/:id',
         views:{
             'main@':{
+                resolve:{
+                    article:function($stateParams,$location, articleService){
+
+                        var id = $stateParams.id;
+                        return articleService.getOne(id);
+
+                    }
+                },
                 templateUrl: 'partial/edit-article/edit-article.html',
                 controller:'EditArticleCtrl'
             }
+
         }
     });
     $stateProvider.state('app.new-article', {
@@ -126,11 +135,6 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
             'main@':{
                 templateUrl: 'partial/new-article/new-article.html',
                 controller:'NewArticleCtrl'
-            }
-        },
-        resolve:{
-            projects:function(projectService){
-                return projectService.getList();
             }
         }
     });

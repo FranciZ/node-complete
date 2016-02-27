@@ -25,11 +25,22 @@ angular.module('cms').factory('articleService',function($http) {
 
                     var list = res.data;
                     article.model.list = list;
-                    console.log(list);
 
                     if(cb) {
                         cb(list);
                     }
+
+                });
+
+        },
+        getOne:function(id){
+
+            return $http.get('/api/article/'+id)
+                .then(function(res){
+
+                    var item = res.data;
+
+                    article.model.item = item;
 
                 });
 
