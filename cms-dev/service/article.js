@@ -54,6 +54,20 @@ angular.module('cms').factory('articleService',function($http) {
                     }
 
                 });
+        },
+        update:function(id, data, cb){
+
+            return $http.put('/api/article/'+id,data)
+                .then(function(res){
+
+                    article.model.item = res.data;
+
+                    if(cb){
+                        cb(res.data);
+                    }
+
+                });
+
         }
     };
 

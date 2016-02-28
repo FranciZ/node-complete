@@ -98,7 +98,6 @@ exports.init = function(app){
 
     });
 
-
     app.put('/api/project/:id', function(req, res){
 
         var projectData = req.body;
@@ -118,7 +117,5 @@ exports.init = function(app){
 
 
     });
-
-
 
 };

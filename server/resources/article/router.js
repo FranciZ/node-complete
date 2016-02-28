@@ -79,5 +79,24 @@ exports.init = function(app){
 
     });
 
+    app.put('/api/article/:id', function(req, res){
+
+        var articleData = req.body;
+        var articleId   = req.params.id;
+
+        var Article = mongoose.model('Article');
+
+        Article.findByIdAndUpdate(articleId, articleData, function(err, doc){
+
+            if(!err) {
+                res.send(doc);
+            }else{
+                res.sendStatus(400);
+            }
+
+        });
+
+
+    });
 
 };
