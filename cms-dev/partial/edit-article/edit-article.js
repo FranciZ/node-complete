@@ -1,7 +1,8 @@
-angular.module('cms').controller('EditArticleCtrl',function($scope, $stateParams, articleService, $state){
+angular.module('cms').controller('EditArticleCtrl',function($scope, $stateParams, articleService, projectService, $state){
 
     var id = $stateParams.id;
 
+    $scope.projects = projectService.model.list;
     $scope.model = articleService.model.item;
 
     $scope.save = function(){
