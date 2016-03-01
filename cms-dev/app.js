@@ -103,6 +103,11 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
                 templateUrl: 'partial/articles/articles.html',
                 controller:'ArticlesCtrl'
             }
+        },
+        resolve:{
+            articles:function(articleService){
+                return articleService.getList();
+            }
         }
 
     });
@@ -110,22 +115,36 @@ angular.module('cms').config(function($stateProvider, $urlRouterProvider) {
         url: 'edit-article/:id',
         views:{
             'main@':{
+                resolve:{
+                    article:function($stateParams,$location, articleService){
+
+                        var id = $stateParams.id;
+                        return articleService.getOne(id);
+
+                    },
+                    projects:function(projectService){
+                        console.log('getting projects list!');
+                        return projectService.getList();
+                    }
+                },
                 templateUrl: 'partial/edit-article/edit-article.html',
                 controller:'EditArticleCtrl'
             }
+
         }
     });
     $stateProvider.state('app.new-article', {
         url: 'new-article',
         views:{
             'main@':{
+                resolve:{
+                    projects:function(projectService){
+                        console.log('getting projects list!');
+                        return projectService.getList();
+                    }
+                },
                 templateUrl: 'partial/new-article/new-article.html',
                 controller:'NewArticleCtrl'
-            }
-        },
-        resolve:{
-            projects:function(projectService){
-                return projectService.getList();
             }
         }
     });

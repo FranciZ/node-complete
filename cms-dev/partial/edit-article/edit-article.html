@@ -1,4 +1,21 @@
-<div class="col-md-12" ng-controller="EditArticleCtrl">
+<section class="content-header">
+    <div class="btn btn-md pull-right btn-success" ng-click="save()">Save</div>
+    <h1>Editing article: <b>{{model.title}}</b></h1>
+</section>
 
+<section class="content">
 
-</div>
+    <label>Title</label>
+    <input type="text" class="form-control" ng-model="model.title">
+    <br/>
+    <label>Excerpt</label>
+    <input type="text" class="form-control" ng-model="model.excerpt">
+    <br/>
+    <label>Content</label>
+    <textarea id="description" ui-tinymce ng-model="model.content" class="form-control"></textarea>
+    <br/>
+    <label>Select project</label>
+    <select ng-model="model.project" class="form-control" ng-options="project.title for project in projects"></select>
+
+</section>
+

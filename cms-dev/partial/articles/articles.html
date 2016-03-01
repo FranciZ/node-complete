@@ -7,15 +7,24 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Title</th>
+                <th>Excerpt</th>
                 <th>Date</th>
-                <th>Views</th>
-                <th>Published</th>
                 <th></th>
             </tr>
 
         </thead>
         <tbody>
+            <tr ng-repeat="article in list">
+                <td>{{article.title}}</td>
+                <td>{{article.excerpt}}</td>
+                <td>{{article.dateTime | date:'dd/MM/yy hh:mm:ss'}}</td>
+                <td>
+                    <div class="btn btn-xs btn-primary" ui-sref="app.edit-article({id:article._id})">Edit</div>
+                    <div class="btn btn-xs btn-danger" ng-click="delete(article._id)">Delete</div>
+                </td>
+            </tr>
+
 
         </tbody>
     </table>

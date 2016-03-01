@@ -36,7 +36,6 @@ angular.module('cms').factory('projectService',function($http) {
 
                     var list = res.data;
                     project.model.list = list;
-                    console.log(list);
 
                     if(cb) {
                         cb(list);
